@@ -9,6 +9,8 @@ module Virtus
     #
     # @api private
     def const_missing(name)
+      return Integer if name == :Fixnum || name == :Bignum
+
       Attribute::Builder.determine_type(name) or
         Axiom::Types.const_defined?(name) && Axiom::Types.const_get(name) or
         super

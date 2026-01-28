@@ -1,3 +1,9 @@
+# v2.0.1 2026-01-28
+
+* [changed] require Ruby >= 3.3 (internal fork)
+* [added] add bigdecimal runtime dependency for Ruby 3.4 default-gem changes (internal fork)
+* [fixed] map legacy Fixnum/Bignum to Integer for Ruby 3.3+ compatibility (internal fork)
+
 # v2.0.0 2021-06-07
 
 * [changed] min ruby version is now 2.0 (solnic)

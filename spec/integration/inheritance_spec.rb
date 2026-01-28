@@ -8,7 +8,7 @@ describe 'Inheritance' do
       end
 
       class First < Base
-        attribute :id, Fixnum
+        attribute :id, Integer
         attribute :name, String, default: ->(first, _) { "Named: #{first.id}" }
         attribute :description, String
       end

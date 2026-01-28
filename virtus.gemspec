@@ -20,7 +20,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency('descendants_tracker', '~> 0.0', '>= 0.0.3')
   gem.add_dependency('coercible', '~> 1.0')
   gem.add_dependency('axiom-types', '~> 0.1')
+  gem.add_dependency('bigdecimal')
 
   gem.add_development_dependency 'rake'
-  gem.required_ruby_version = '>= 2.0'
+  gem.required_ruby_version = '>= 3.3'
 end
