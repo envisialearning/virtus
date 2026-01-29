@@ -71,6 +71,10 @@ module Virtus
 
       # @api public
       def coerce(value)
+        if defined?(::ActiveRecord::Relation) && primitive <= ::ActiveRecord::Relation
+          return value if value.is_a?(::ActiveRecord::Relation) || value.is_a?(Array)
+        end
+
         coerced = super
 
         return coerced unless coerced.respond_to?(:each_with_object)

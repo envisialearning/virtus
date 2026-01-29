@@ -1,3 +1,7 @@
+# v2.0.3 2026-01-29
+
+* [fixed] avoid ActiveRecord::Relation construction when coercing collections (internal fork)
+
 # v2.0.2 2026-01-28
 
 * [fixed] support keyword arguments in Virtus constructors for Ruby 3.x (internal fork)
