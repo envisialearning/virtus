@@ -13,7 +13,15 @@ module Virtus
       # @return [undefined]
       #
       # @api private
-      def initialize(attributes = nil)
+      def initialize(attributes = nil, **kwargs)
+        if kwargs.any?
+          if attributes.nil?
+            attributes = kwargs
+          elsif attributes.respond_to?(:to_hash)
+            attributes = attributes.to_hash.merge(kwargs)
+          end
+        end
+
         attribute_set.set(self, attributes) if attributes
         set_default_attributes
       end

@@ -1,3 +1,7 @@
+# v2.0.2 2026-01-28
+
+* [fixed] support keyword arguments in Virtus constructors for Ruby 3.x (internal fork)
+
 # v2.0.1 2026-01-28
 
 * [changed] require Ruby >= 3.3 (internal fork)
