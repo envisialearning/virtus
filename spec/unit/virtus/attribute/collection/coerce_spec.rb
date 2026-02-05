@@ -71,4 +71,54 @@ describe Virtus::Attribute::Collection, '#coerce' do
       expect(subject).to be(input)
     end
   end
+
+  context 'when primitive is ActiveRecord::Relation' do
+    before do
+      relation_class = Class.new do
+        include Enumerable
+
+        def initialize(*args)
+          raise ArgumentError, 'expected 1' if args.empty?
+        end
+
+        def each
+        end
+      end
+
+      @active_record_defined = Object.const_defined?(:ActiveRecord)
+      @active_record_original = Object.const_get(:ActiveRecord) if @active_record_defined
+
+      Object.const_set(:ActiveRecord, Module.new)
+      ActiveRecord.const_set(:Relation, relation_class)
+    end
+
+    after do
+      ActiveRecord.send(:remove_const, :Relation) if ActiveRecord.const_defined?(:Relation)
+
+      if @active_record_defined
+        Object.send(:remove_const, :ActiveRecord)
+        Object.const_set(:ActiveRecord, @active_record_original)
+      else
+        Object.send(:remove_const, :ActiveRecord) if Object.const_defined?(:ActiveRecord)
+      end
+    end
+
+    let(:object) { Virtus::Attribute.build(ActiveRecord::Relation) }
+
+    context 'when input is an array' do
+      let(:input) { [] }
+
+      it 'passes through arrays without constructing a relation' do
+        expect(subject).to eq([])
+      end
+    end
+
+    context 'when input is a relation instance' do
+      let(:input) { ActiveRecord::Relation.new(:dummy) }
+
+      it 'passes through relation instances' do
+        expect(subject).to equal(input)
+      end
+    end
+  end
 end
